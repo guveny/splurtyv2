@@ -7,7 +7,10 @@ class QuotesController < ApplicationController
             end
 
             def create
-                        Quote.create(quote_params)
+                       @quote = Quote.create(quote_params)
+                        if @quote.invalid?
+                                    flash[:error] = '<strong> could not saved because of your fault </strong> the information you entered is lie'
+                        end
                         redirect_to root_path
             end
 
